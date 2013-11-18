@@ -35,8 +35,14 @@ if __name__ == '__main__':
         
         #build place
         id = int(x[0])
+        name = x[1]
+        reward = float(x[3])
+        description = x[4]
         
+        places.append(Place(id, name, reward, description))
     
+    placesFile.close()
+        
     #process transitions
     input = transitionsFile.readlines()
     transitions = []
@@ -53,3 +59,7 @@ if __name__ == '__main__':
             pairs.append((int(x[i]), float(x[i+1])))
         
         transitions.append(Transition(fromState, action, pairs))
+    
+    transitionsFile.close()
+    
+    main(places, transitions)
