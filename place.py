@@ -8,15 +8,19 @@ place.
 '''
 
 class Place():
-    ''' Place on campus.'''
+    '''Place on campus.'''
     
-    def __init__(self, id, reward, description):
+    def __init__(self, id, name, reward, description):
         self.id = id
+        self.name = name
         self.reward = reward
         self.description = description
         
     def getId(self):
         return self.id
+        
+    def getName(self):
+        return self.name
         
     def getReward(self):
         return self.reward
@@ -24,3 +28,5 @@ class Place():
     def getDescription(self):
         return self.description
             
+    def toString(self):
+        return str(self.id) +'\t'+ self.name +'\t'+ str(self.reward) +'\t'+ self.description
