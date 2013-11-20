@@ -11,40 +11,54 @@ actually is the result.
 class Transition:
     '''transition properties'''
     
-    def __init__(self, fromState, action, destinationStates):
-        '''fromState, action, destinationStates is list of state,probability pairs'''
-        self.fromState = fromState
+    def __init__(self, fromPlace, action, destinationPlaces):
+        '''fromPlace, action, destinationStates is list of place,probability pairs'''
+        self.fromPlace = fromPlace
         self.action = action
-        self.destinationStates = destinationStates
+        self.destinationPlaces = destinationPlaces
 
     def getAction(self):
         return self.action
         
-    def getFromState(self):
-        return self.fromState
+    def getFromPlace(self):
+        return self.fromPlace
         
-    def getDestinationStates(self):
-        states = []
-        for state in self.destinationStates:
-            states.append(state[0])
-        return states
+    def getDestinationPlaces(self):
+        places = []
+        for place in self.destinationPlaces:
+            places.append(place[0])
+        return places
         
-    def indexOfState(self, state):
-        for i in range(len(self.destinationStates)):
-            if self.destinationStates[i][0] == state:
+    def indexOfPlace(self, place):
+        for i in range(len(self.destinationPlaces)):
+            if self.destinationPlaces[i][0] == place:
                 return i
         
     def toString(self):
         s = ''
-        s += str(self.fromState) +'\t'+ str(self.action)
-        for dest in self.destinationStates:
+        s += str(self.fromPlace) +'\t'+ str(self.action)
+        for dest in self.destinationPlaces:
             s += '\t' + repr(dest)
-            
         return s
-        
-    def probabilityOfState(self, state):
-        '''return the probability of the given state'''
-        for i in self.destinationStates:
-            #i is the pair: state, probability
-            if i[0] == state:
+
+    def probabilityOfPlace(self, place):
+        '''return the probability of the given place'''
+        for i in self.destinationPlaces:
+            #i is the pair: place, probability
+            if i[0] == place:
                 return i[1]
+
+'''
+Given a list of transitions, this method with find all transitions that start from
+the provided place id.
+
+param: id place id
+param: transitions list of transitions
+returns: list of transitions that originate at id
+'''
+def getTransitions(id, transitions):
+    result = []
+    for transition in transitions:
+        if transition.getFromPlace() == id:
+            result.append(transition)
+    return result

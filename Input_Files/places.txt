@@ -1,7 +1,7 @@
 1,Dreese Labs,DL.jpg,-1,Stuck in the lab finishing CSE 3521 homework!
 2,Bolz Hall,BO.jpg,-0.05,Another fine class with Dr. Morris 
 3,Parking,Parking.jpg,-1,Oh no!  Can't find a parking space!
-4,Science and Engineering Library,SEL.jpg,-0.05,Gotta hit the books.
+4,SEL,SEL.jpg,-0.05,Gotta hit the books.
 5,University Hall,UH.jpg,-0.05,
 6,Library,library.jpg,-0.05,Get a coffee at Brennan's and hit the stacks.
 7,Page Hall,page.jpg,-0.05,

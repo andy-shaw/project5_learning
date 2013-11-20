@@ -7,10 +7,18 @@ The learner will read in a set of places and transition properties from CSV text
     determine
     
 '''
+from place import Place
+from transition import Transition, getTransitions
 
 def main(places, transitions):
-    pass
+    #initialize states to 0
+    states = []
+    for place in places:
+        states.append(State(0, place, getTransition(place.getId(), transitions)
     
+
+#------------------------------------------------------------------------------------
+
 if __name__ == '__main__':
     #get command line args
     import sys
@@ -29,6 +37,7 @@ if __name__ == '__main__':
     #process CSV data
     #process places
     input = placesFile.readlines()
+    places = []
     
     for line in input:
         x = line.rstrip().split(',')
@@ -51,14 +60,14 @@ if __name__ == '__main__':
         x = line.rstrip().split(',')
         
         #build transition
-        fromState = int(x[0])
+        fromPlace = int(x[0])
         action = x[1]
         pairs = []
         for i in range(2, len(x), 2):
-            #data is state, probability pairs
+            #data is place,probability pairs
             pairs.append((int(x[i]), float(x[i+1])))
         
-        transitions.append(Transition(fromState, action, pairs))
+        transitions.append(Transition(fromPlace, action, pairs))
     
     transitionsFile.close()
     

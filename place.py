@@ -29,4 +29,4 @@ class Place():
         return self.description
             
     def toString(self):
-        return str(self.id) +'\t'+ self.name +'\t'+ str(self.reward) +'\t'+ self.description
+        return str(self.id) +'\t'+ self.name.ljust(20) +'\t'+ str(self.reward) +'\t'+ self.description
