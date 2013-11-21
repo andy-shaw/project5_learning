@@ -51,7 +51,6 @@ for line in input:
         pairs.append((int(x[i]), float(x[i+1])))
     
     ndtransitions.append(Transition(fromPlace, action, pairs))
-    if debug: print trans.toString()
 
 #test for probabilities summing to 1 and correct input
 for trans in ndtransitions:
@@ -60,6 +59,7 @@ for trans in ndtransitions:
         p += trans.probabilityOfPlace(place)
 
     assert(str(p) == '1.0') #BIG HACK  ---- do not try at home, kids
+    if debug: print trans.toString()
     
 if debug: print '========================================'
 

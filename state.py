@@ -27,6 +27,9 @@ class State:
     def getTransitions(self):
         return self.transitions
         
+    def isTerminal(self):
+        return self.transitions == 0
+        
     '''
     This method will update the utility of the State.  This algorithm will look at destination
     states, so all states in the environment need to be passed.  It is assumed that gamma is 1.

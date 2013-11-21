@@ -1,12 +1,6 @@
 <NotepadPlus>
     <Session activeView="0">
-        <mainView activeIndex="0">
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="4452" startPos="308" endPos="308" selMode="0" lang="Python" encoding="-1" filename="C:\Users\Chip Shaw\Documents\GitHub\project5_learning\learner.py" />
-        </mainView>
-        <subView activeIndex="0">
-            <File firstVisibleLine="19" xOffset="0" scrollWidth="700" startPos="633" endPos="633" selMode="0" lang="Python" encoding="-1" filename="C:\Users\Chip Shaw\Documents\GitHub\project5_learning\state.py" />
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="714" startPos="1492" endPos="1492" selMode="0" lang="Python" encoding="-1" filename="C:\Users\Chip Shaw\Documents\GitHub\project5_learning\transition.py" />
-            <File firstVisibleLine="0" xOffset="0" scrollWidth="714" startPos="813" endPos="813" selMode="0" lang="Python" encoding="-1" filename="C:\Users\Chip Shaw\Documents\GitHub\project5_learning\place.py" />
-        </subView>
+        <mainView activeIndex="0" />
+        <subView activeIndex="0" />
     </Session>
 </NotepadPlus>

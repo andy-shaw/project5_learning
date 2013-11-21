@@ -10,14 +10,23 @@ The learner will read in a set of places and transition properties from CSV text
 from place import Place
 from transition import Transition, getTransitions
 from state import State, getState
+import random
 
 def main(places, transitions):
+
+    numberOfRestarts = 1000
+
     #initialize states to 0
     states = []
     for place in places:
         states.append(State(0, place, getTransitions(place.getId(), transitions)))
     
-    
+    for i in range(numberOfRestarts):
+        #select a random state to start in
+        state = states[random.randint(0, len(states) -1)]
+        
+        #update the utility for that state
+        
 
 #------------------------------------------------------------------------------------
 
