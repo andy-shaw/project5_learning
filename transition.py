@@ -20,6 +20,9 @@ class Transition:
     def getAction(self):
         return self.action
         
+    def actionToString(self):
+        if self.action == 
+        
     def getFromPlace(self):
         return self.fromPlace
         

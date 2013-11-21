@@ -29,7 +29,7 @@ class State:
         
     '''
     This method will update the utility of the State.  This algorithm will look at destination
-    states, so all states in the environment need to be passed.
+    states, so all states in the environment need to be passed.  It is assumed that gamma is 1.
     
     param: allStates all states that are in the environment
     '''
@@ -40,5 +40,26 @@ class State:
         possibleActions = []
         #get all actions
         for transition in self.transitions:
+            x = 0.0
             for destination in transition.getDestinationPlaces():
-                
+                x += transition.probabilityOfPlace() * getState(destination, allStates).getUtility()
+            
+            possibleActions.append((x, transition))
+            
+        #choose the best action
+        bestAction = max(possibleActions)
+        
+        self.utility = reward + bestAction
+
+'''
+Given an id, and a set of states, this function returns the state with the matching id.
+
+param: id id of a state
+param: states set of states to search in
+return: state with provided id, or -1 if not found
+'''
+def getState(id, states):
+    for state in states:
+        if state.getId() == id:
+            return state
+    return -1
