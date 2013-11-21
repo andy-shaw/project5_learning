@@ -74,8 +74,20 @@ class State:
         reward = self.place.getReward()
         
         possibleActions = []
+
         for transition in self.transitions:
+            possibleActions.append((str(transition.probabilityOfPlace(destination)), str(getState(destination, allStates))))
             
+        # build string
+        formula += str(reward) + ' + '
+        
+        strPossibleActions = []
+        for action in possibleActions:
+            s = '(' + str(action[0]) + ' * ' + str(action[1]) + ')'
+            strPossibleActions.append(s)
+
+        for action in strPossibleActions:
+            formula += action
         
 '''
 Given an id, and a set of states, this function returns the state with the matching id.
