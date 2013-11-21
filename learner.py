@@ -14,7 +14,7 @@ import random
 
 def main(places, transitions):
 
-    numberOfRestarts = 1000
+    numberOfRestarts = 10
 
     #initialize states to 0
     states = []
@@ -26,7 +26,10 @@ def main(places, transitions):
         state = states[random.randint(0, len(states) -1)]
         
         #update the utility for that state
+        state.updateUtility(states)
+        print state.getFormula(states)
         
+    for state in states: print state.getUtility()
 
 #------------------------------------------------------------------------------------
 
