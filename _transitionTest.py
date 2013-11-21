@@ -82,6 +82,7 @@ for line in input:
     
     places.append(Place(id, name, reward, description))
     
+    #pair up the ndtransitions with the fromPlace
 for place in places:
     id = place.getId()
     x = getTransitions(id, ndtransitions)

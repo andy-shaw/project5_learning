@@ -21,7 +21,12 @@ class Transition:
         return self.action
         
     def actionToString(self):
-        if self.action == 
+        if self.action == 'S':
+            return 'Scarlet'
+        elif self.action == 'G':
+            return 'Gray'
+        elif self.action == 'B':
+            return 'Black'
         
     def getFromPlace(self):
         return self.fromPlace

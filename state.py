@@ -25,7 +25,7 @@ class State:
         return self.id
         
     def getTransitions(self):
-        return transitions
+        return self.transitions
         
     '''
     This method will update the utility of the State.  This algorithm will look at destination

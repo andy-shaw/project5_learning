@@ -9,12 +9,14 @@ The learner will read in a set of places and transition properties from CSV text
 '''
 from place import Place
 from transition import Transition, getTransitions
+from state import State, getState
 
 def main(places, transitions):
     #initialize states to 0
     states = []
     for place in places:
-        states.append(State(0, place, getTransition(place.getId(), transitions)
+        states.append(State(0, place, getTransitions(place.getId(), transitions)))
+    
     
 
 #------------------------------------------------------------------------------------
