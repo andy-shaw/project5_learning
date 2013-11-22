@@ -20,7 +20,7 @@ class Transition:
     def getAction(self):
         return self.action
         
-    def actionToString(self):
+    def getActionAsString(self):
         if self.action == 'S':
             return 'Scarlet'
         elif self.action == 'G':
@@ -52,18 +52,22 @@ class Transition:
     def choosePlace(self):
         '''create bounds based on destination place probabilities and choose one based on a random number'''
         import random, math
-        bounds = []
+        bounds = [0.0]
         for destination in self.destinationPlaces:
             bounds.append(math.ceil(self.probabilityOfPlace(destination[0]) * 100))
             
         # set all bounds summing up to 100
         for i in range(1, len(bounds)): bounds[i] += bounds[i-1]
         
+        #for case where there is only one place to go
+        if len(bounds) == 1:
+            return self.destinationPlaces[0][0]
+        
         #return the place that is chosen by the random number between 0-100
         x = random.randint(0,100)
         for i in range(len(bounds) -1):
-            if bounds[i] < x <= bounds[i+1]:
-                return self.destinations[i][0]
+            if bounds[i] <= x <= bounds[i+1]:
+                return self.destinationPlaces[i][0]
 
     def probabilityOfPlace(self, placeid):
         '''return the probability of the given place'''

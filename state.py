@@ -73,21 +73,20 @@ class State:
         formula = ''
         reward = self.place.getReward()
         
-        possibleActions = []
-
-        for transition in self.transitions:
-            for destination in transition.getDestinationPlaces():
-                possibleActions.append((str(transition.probabilityOfPlace(destination)), str(getState(destination, allStates).getUtility())))
-                
+        if terminal: return str(reward)
+        
+        transition = self.bestTransition
+        
         strPossibleActions = []
-        for action in possibleActions:
-            s = '(' + str(action[0]) + '*' + str(action[1]) + ')'
+        for dest in transition.getDestinationPlaces():
+            s = '(' + str(transition.probabilityOfPlace(dest)) + '*' 
+            s += str(getState(dest, allStates).getUtility()) + ')'
             strPossibleActions.append(s)
             
         # build string
         formula += str(reward)
         
-        if not terminal: formula += '+' + "+".join(strPossibleActions)
+        formula += '+' + "+".join(strPossibleActions)
             
         return formula
         
