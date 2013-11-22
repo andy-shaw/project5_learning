@@ -68,7 +68,7 @@ class State:
     param: allStates all states that are in the environment
     return: string representation of the formula
     '''
-    def getFormula(self, allStates):
+    def getFormula(self, allStates, terminal=False):
         '''get string representation of Bellman update'''
         formula = ''
         reward = self.place.getReward()
@@ -76,18 +76,33 @@ class State:
         possibleActions = []
 
         for transition in self.transitions:
-            possibleActions.append((str(transition.probabilityOfPlace(destination)), str(getState(destination, allStates))))
-            
-        # build string
-        formula += str(reward) + ' + '
-        
+            for destination in transition.getDestinationPlaces():
+                possibleActions.append((str(transition.probabilityOfPlace(destination)), str(getState(destination, allStates).getUtility())))
+                
         strPossibleActions = []
         for action in possibleActions:
-            s = '(' + str(action[0]) + ' * ' + str(action[1]) + ')'
+            s = '(' + str(action[0]) + '*' + str(action[1]) + ')'
             strPossibleActions.append(s)
+            
+        # build string
+        formula += str(reward)
+        
+        if not terminal: formula += '+' + "+".join(strPossibleActions)
+            
+        return formula
+        
+'''
+This method compares 2 states given, and returns a neg, 0, or pos number depending
+on if the first element is greater than, equal to, or less than the second.
 
-        for action in strPossibleActions:
-            formula += action
+param: state1 first state 
+param: state2 second state
+return: neg if first is less than second, 0 if equal, pos if first is greater than second
+'''
+def compareStates(state1, state2):
+    if state1.getUtility > state2.getUtility: return 1
+    elif state1.getUtility == state2.getUtility: return 0
+    elif state1.getUtility < state2.getUtility: return -1
         
 '''
 Given an id, and a set of states, this function returns the state with the matching id.

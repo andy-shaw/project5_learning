@@ -48,12 +48,28 @@ class Transition:
         for dest in self.destinationPlaces:
             s += '\t' + repr(dest)
         return s
+        
+    def choosePlace(self):
+        '''create bounds based on destination place probabilities and choose one based on a random number'''
+        import random, math
+        bounds = []
+        for destination in self.destinationPlaces:
+            bounds.append(math.ceil(self.probabilityOfPlace(destination[0]) * 100))
+            
+        # set all bounds summing up to 100
+        for i in range(1, len(bounds)): bounds[i] += bounds[i-1]
+        
+        #return the place that is chosen by the random number between 0-100
+        x = random.randint(0,100)
+        for i in range(len(bounds) -1):
+            if bounds[i] < x <= bounds[i+1]:
+                return self.destinations[i][0]
 
-    def probabilityOfPlace(self, place):
+    def probabilityOfPlace(self, placeid):
         '''return the probability of the given place'''
         for i in self.destinationPlaces:
             #i is the pair: place, probability
-            if i[0] == place:
+            if i[0] == placeid:
                 return i[1]
 
 '''

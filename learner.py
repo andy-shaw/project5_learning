@@ -9,27 +9,31 @@ The learner will read in a set of places and transition properties from CSV text
 '''
 from place import Place
 from transition import Transition, getTransitions
-from state import State, getState
+from state import State, getState, compareStates
 import random
 
 def main(places, transitions):
 
-    numberOfRestarts = 10
+    numberOfRestarts = 50
 
     #initialize states to 0
     states = []
     for place in places:
         states.append(State(0, place, getTransitions(place.getId(), transitions)))
     
+    #declare state for scope
+    
     for i in range(numberOfRestarts):
         #select a random state to start in
         state = states[random.randint(0, len(states) -1)]
-        
-        #update the utility for that state
-        state.updateUtility(states)
-        print state.getFormula(states)
-        
-    for state in states: print state.getUtility()
+
+        print state
+        while not state.isTerminal():
+            #update the utility for that state
+            state.updateUtility(states)
+
+            #if not a terminal, then choose the state from the best transition
+            state = getState(state.getBestTransition().choosePlace(), states)
 
 #------------------------------------------------------------------------------------
 
