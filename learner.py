@@ -87,6 +87,7 @@ if __name__ == '__main__':
         
     try: 
         if sys.argv[3] == "SILENT": silent = True
+        else: silent = False
     except: 
         silent = False
         
