@@ -28,11 +28,12 @@ def main(places, transitions, silent):
     noChange = 0
     total = 99999999
     oldTotal = 1
+    converged = 0
     
     for i in range(numberOfRestarts):
         #select a random state to start in
         state = states[random.randint(0, len(states) -1)]
-        if not silent: print '' #newline
+        if not silent and converged == 0: print '' #newline
         
         while not state.isTerminal():
             #update the utility for that state
@@ -42,12 +43,14 @@ def main(places, transitions, silent):
             values = []
             for x in states: values.append(x.getUtility())
             total = sum(values)
-            if total == oldTotal: noChange += 1
+            if str(total) == str(oldTotal): noChange += 1
             else: noChange = 0
             
             oldTotal = total
             
-            if not silent: print "State:{0}\tBest:{1}\tUtility({2})={3}={4}".format(str(state.getId()).ljust(3), state.getBestTransition().getActionAsString(),state.getId(),  state.getFormula(states), state.getUtility())
+            if noChange == 10: converged = i
+            
+            if not silent and converged == 0: print "State:{0}\tBest:{1}\tUtility({2})={3}={4}".format(str(state.getId()).ljust(3), state.getBestTransition().getActionAsString(),state.getId(),  state.getFormula(states), round(state.getUtility(),4))
 
             #if not a terminal, then choose the state from the best transition
             state = getState(state.getBestTransition().choosePlace(), states)
@@ -55,10 +58,14 @@ def main(places, transitions, silent):
         #update and print terminal state
         state.updateUtility(states)
         
-        if not silent: print "State:{0}\tBest:{1}\tUtility({2})={3}={4}".format(str(state.getId()).ljust(3), 'Terminal', state.getId(), state.getFormula(states, True), state.getUtility())
+        if not silent and converged == 0: print "State:{0}\tBest:{1}\tUtility({2})={3}={4}".format(str(state.getId()).ljust(3), 'Terminal', state.getId(), state.getFormula(states, True), round(state.getUtility(),4))
         
     
     #output policy
+
+    #output iteration of convergence
+    print '\nConsidered converged on iteration {0} of {1}'.format(converged, numberOfRestarts)
+    
     print '\nResults'
     print '-'*80
     for state in states:

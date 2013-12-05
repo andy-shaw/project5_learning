@@ -71,7 +71,7 @@ class State:
     def getFormula(self, allStates, terminal=False):
         '''get string representation of Bellman update'''
         formula = ''
-        reward = self.place.getReward()
+        reward = round(self.place.getReward(), 4)
         
         if terminal: return str(reward)
         
@@ -80,7 +80,7 @@ class State:
         strPossibleActions = []
         for dest in transition.getDestinationPlaces():
             s = '(' + str(transition.probabilityOfPlace(dest)) + '*' 
-            s += str(getState(dest, allStates).getUtility()) + ')'
+            s += str(round(getState(dest, allStates).getUtility(), 4)) + ')'
             strPossibleActions.append(s)
             
         # build string
