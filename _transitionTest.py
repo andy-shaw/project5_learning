@@ -37,7 +37,7 @@ file.close()
 
 if debug:print '========================================'
 
-file = open(os.getcwd() + r'\Input_Files\non-deterministic_transistions.txt', 'r')
+file = open(os.getcwd() + r'\Input_Files\non-deterministic_transitions.txt', 'r')
 input = file.readlines()
 
 ndtransitions = []
@@ -86,11 +86,11 @@ for line in input:
 for place in places:
     id = place.getId()
     x = getTransitions(id, ndtransitions)
-    if debug: print id, '\n----'
+    if debug: print '-->' + str(id)
     for trans in x:
         if debug: print trans.toString()
         assert(id == trans.getFromPlace())
-    if debug: print '----------------------------------------------------------------'
+    if debug: print '________________________________________________________________\n'
     
     
 file.close()
