@@ -12,7 +12,7 @@ from transition import Transition, getTransitions
 from state import State, getState, compareStates
 import random, math
 
-def main(places, transitions, silent):
+def main(places, transitions, silent, invisible=False):
 
     numberOfRestarts = 1000
 
@@ -64,16 +64,17 @@ def main(places, transitions, silent):
     #output policy
 
     #output iteration of convergence
-    print '\nConsidered converged on iteration {0} of {1}'.format(converged, numberOfRestarts)
+    if not invisible: print '\nConsidered converged on iteration {0} of {1}'.format(converged, numberOfRestarts)
     
-    print '\nResults'
-    print '-'*80
+    if not invisible: print '\nResults'
+    if not invisible: print '-'*80
     for state in states:
         if not state.isTerminal(): 
-            print 'State:{0}\tUtility = {1}\tPolicy = {2}'.format(str(state.getId()).ljust(3), str(state.getUtility()).ljust(15), state.getBestTransition().getActionAsString())
+            if not invisible: print 'State:{0}\tUtility = {1}\tPolicy = {2}'.format(str(state.getId()).ljust(3), str(state.getUtility()).ljust(15), state.getBestTransition().getActionAsString())
         else: 
-            print 'State:{0}\tUtility = {1}\tPolicy = {2}'.format(str(state.getId()).ljust(3), str(state.getUtility()).ljust(15), 'Terminal')
+            if not invisible: print 'State:{0}\tUtility = {1}\tPolicy = {2}'.format(str(state.getId()).ljust(3), str(state.getUtility()).ljust(15), 'Terminal')
 
+    return converged
 
 #------------------------------------------------------------------------------------
 
@@ -134,5 +135,8 @@ if __name__ == '__main__':
         transitions.append(Transition(fromPlace, action, pairs))
     
     transitionsFile.close()
-    
-    main(places, transitions, silent)
+
+    f = open('stats.txt', 'a')
+    stat = main(places, transitions, silent, True)
+    f.write(str(stat) + ',')
+    f.close()
