@@ -32,6 +32,7 @@ def printTimes(t1, t2):
 def main(runs):
 
 	print '\nAnalyzing Convergence rate over', runs, 'runs'
+	print 'The analysis will take approximately', round(runs*.381119, 3), 'seconds'
 	times = []
 
 	#run the deterministic
