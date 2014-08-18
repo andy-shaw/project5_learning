@@ -58,7 +58,13 @@ for trans in ndtransitions:
     for place in trans.getDestinationPlaces():
         p += trans.probabilityOfPlace(place)
 
-    assert(str(p) == '1.0') #BIG HACK  ---- do not try at home, kids
+    try:
+        assert(str(p) == '1.0') #BIG HACK  ---- do not try at home, kids
+    except AssertionError as e:
+        print "ERROR: ", trans.toString()
+        print e
+        raise
+
     if debug: print trans.toString()
     
 if debug: print '========================================'

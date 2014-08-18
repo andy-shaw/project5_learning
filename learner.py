@@ -129,14 +129,14 @@ if __name__ == '__main__':
         action = x[1]
         pairs = []
         for i in range(2, len(x), 2):
-            #data is place,probability pairs
+            #data is (place,probability) pairs
             pairs.append((int(x[i]), float(x[i+1])))
         
         transitions.append(Transition(fromPlace, action, pairs))
     
     transitionsFile.close()
 
-    f = open('stats.txt', 'a')
-    stat = main(places, transitions, silent, True)
-    f.write(str(stat) + ',')
-    f.close()
+    # f = open('stats.txt', 'a')
+    stat = main(places, transitions, silent, False)
+    # f.write(str(stat) + ',')
+    # f.close()
